@@ -24,7 +24,7 @@ header a{color:#fff;text-decoration:none;margin-left:16px}
 <section class="hero">
 <div class="sticky">
 <div class="overlay"></div>
-<img id="frame" src="frames/frame0001.jpg" alt="">
+<img id="frame" src="frames/frame_0001.jpg" alt="">
 <div class="title reveal"><h1>FIRE CRAFTED</h1><p>Luxury dining • Scroll to reveal the story</p></div>
 </div>
 </section>
@@ -52,7 +52,7 @@ addEventListener('scroll',()=>{
  const max=hero.offsetHeight-innerHeight;
  let p=Math.min(Math.max(-r.top/max,0),1);
  let n=Math.max(1,Math.min(total,Math.round(p*(total-1)+1)));
- img.src='frames/frame'+String(n).padStart(4,'0')+'.jpg';
+ img.src='frames/frame_'+String(n).padStart(4,'0')+'.jpg';
  img.style.transform=`perspective(1200px) rotateY(${(p-.5)*16}deg) rotateX(${8-p*16}deg) scale(${1+p*.12})`;
 });
 </script>
