@@ -1,0 +1,59 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ember Luxury</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:linear-gradient(180deg,#120805,#381708,#0b0b0b);color:#fff;overflow-x:hidden}
+header{position:fixed;top:0;left:0;right:0;padding:16px 22px;display:flex;justify-content:space-between;backdrop-filter:blur(10px);background:#0005;z-index:20}
+header a{color:#fff;text-decoration:none;margin-left:16px}
+.hero{height:220vh;position:relative}
+.sticky{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden}
+#frame{width:min(92vw,620px);border-radius:24px;box-shadow:0 30px 80px #0008;transition:transform .08s}
+.overlay{position:absolute;inset:0;background:radial-gradient(circle,#0000,#0008)}
+.title{position:absolute;text-align:center}
+.title h1{font-size:clamp(3rem,10vw,6rem);text-shadow:0 0 20px #ff8a00}
+.title p{margin-top:12px;color:#eee}
+.sec{min-height:100vh;padding:90px 20px;display:grid;place-items:center}
+.card{max-width:900px;background:#ffffff10;border:1px solid #ffffff18;border-radius:24px;padding:28px;backdrop-filter:blur(14px)}
+.grid{display:grid;gap:18px;margin-top:20px}
+.item{background:#fff1;padding:18px;border-radius:18px}
+.reveal{opacity:0;transform:translateY(40px);transition:.8s}.show{opacity:1;transform:none}
+@media(min-width:800px){.grid{grid-template-columns:repeat(3,1fr)}}
+</style></head><body>
+<header><b>EMBER</b><nav><a href="#menu">Menu</a><a href="#story">Story</a><a href="#book">Reserve</a></nav></header>
+
+<section class="hero">
+<div class="sticky">
+<div class="overlay"></div>
+<img id="frame" src="frames/frame0001.jpg" alt="">
+<div class="title reveal"><h1>FIRE CRAFTED</h1><p>Luxury dining • Scroll to reveal the story</p></div>
+</div>
+</section>
+
+<section id="story" class="sec"><div class="card reveal"><h2>Our Story</h2><p>Open-fire cooking, premium ingredients and unforgettable flavours presented with cinematic elegance.</p></div></section>
+
+<section id="menu" class="sec"><div class="card reveal"><h2>Signature Menu</h2><div class="grid">
+<div class="item">🥘 Royal Biryani</div>
+<div class="item">🥩 Smoked Grill</div>
+<div class="item">🍰 Dessert</div>
+</div></div></section>
+
+<section class="sec"><div class="card reveal"><h2>Guest Experience</h2><p>Every scroll reveals more of the restaurant story with smooth transitions and premium visuals.</p></div></section>
+
+<section id="book" class="sec"><div class="card reveal"><h2>Reserve</h2><input style="width:100%;padding:14px;margin:8px 0;border-radius:10px;border:none" placeholder="Name"><input style="width:100%;padding:14px;margin:8px 0;border-radius:10px;border:none" placeholder="Phone"><button style="width:100%;padding:14px;border:none;border-radius:10px;background:#d96d16;color:#fff">Book Table</button></div></section>
+
+<script>
+const total=40; // change to your frame count
+const img=document.getElementById('frame');
+const hero=document.querySelector('.hero');
+const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('show',e.isIntersecting)),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
+addEventListener('scroll',()=>{
+ const r=hero.getBoundingClientRect();
+ const max=hero.offsetHeight-innerHeight;
+ let p=Math.min(Math.max(-r.top/max,0),1);
+ let n=Math.max(1,Math.min(total,Math.round(p*(total-1)+1)));
+ img.src='frames/frame'+String(n).padStart(4,'0')+'.jpg';
+ img.style.transform=`perspective(1200px) rotateY(${(p-.5)*16}deg) rotateX(${8-p*16}deg) scale(${1+p*.12})`;
+});
+</script>
+</body></html>
