@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Ember Scroll</title><style>
+*{margin:0;box-sizing:border-box}body{background:linear-gradient(#160803,#3b1708,#090909);color:#fff;font-family:Arial}
+.hero{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+img{max-width:85vw;max-height:70vh;border-radius:24px;box-shadow:0 30px 80px #000;transition:transform .08s}
+.overlay{position:absolute;top:5%;left:5%;z-index:2}.spacer{height:4000px}
+</style></head><body>
+<div class='hero'><div class='overlay'><h1>EMBER</h1><p>Scroll to animate</p></div><img id='frame'></div>
+<div class='spacer'></div>
+<script>
+const frames=['frames/frame_0001.jpg',
+'frames/frame_0002.jpg',
+'frames/frame_0003.jpg',
+'frames/frame_0004.jpg',
+'frames/frame_0005.jpg',
+'frames/frame_0006.jpg',
+'frames/frame_0007.jpg',
+'frames/frame_0008.jpg',
+'frames/frame_0009.jpg',
+'frames/frame_0010.jpg',
+'frames/frame_0011.jpg',
+'frames/frame_0012.jpg',
+'frames/frame_0013.jpg',
+'frames/frame_0014.jpg',
+'frames/frame_0015.jpg',
+'frames/frame_0016.jpg',
+'frames/frame_0017.jpg',
+'frames/frame_0018.jpg',
+'frames/frame_0019.jpg',
+'frames/frame_0020.jpg',
+'frames/frame_0021.jpg',
+'frames/frame_0022.jpg',
+'frames/frame_0023.jpg',
+'frames/frame_0024.jpg',
+'frames/frame_0025.jpg',
+'frames/frame_0026.jpg',
+'frames/frame_0027.jpg',
+'frames/frame_0028.jpg',
+'frames/frame_0029.jpg',
+'frames/frame_0030.jpg',
+'frames/frame_0031.jpg',
+'frames/frame_0032.jpg',
+'frames/frame_0033.jpg',
+'frames/frame_0034.jpg',
+'frames/frame_0035.jpg',
+'frames/frame_0036.jpg',
+'frames/frame_0037.jpg',
+'frames/frame_0038.jpg',
+'frames/frame_0039.jpg',
+'frames/frame_0040.jpg'];
+const img=document.getElementById('frame');
+img.src=frames[0];
+addEventListener('scroll',()=>{
+const max=document.body.scrollHeight-innerHeight;
+const p=scrollY/max;
+const i=Math.min(frames.length-1,Math.floor(p*frames.length));
+if(img.src.indexOf(frames[i])===-1) img.src=frames[i];
+img.style.transform=`perspective(1000px) rotateY(${p*20-10}deg) scale(${1+p*0.2})`;
+});
+</script></body></html>
